@@ -1,0 +1,12 @@
+
+# If true, quests must be completed sequentially; that is, you cannot proceed to the next quest until you have completed the previous one.
+# If false, you may complete any quest regardless of the order.
+gradual-quest: true
+
+
+quest-status-progress: "&eIn Progress"
+quest-status-uncompleted: "&cUncompleted"
+quest-status-completed: "&aCompleted"
+quest-status-gradual: "&eComplete the previous one"
+quest-progress-type-individual: "&aIndividual"
+quest-progress-type-global: "&e&lGlobal"

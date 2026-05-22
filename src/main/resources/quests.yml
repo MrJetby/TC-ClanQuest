@@ -1,0 +1,263 @@
+category:
+  example:
+    - quest1
+    - quest2
+    - quest3
+    - quest4
+    - quest5
+    - quest6
+    - quest7
+    - quest8
+    - quest9
+    - quest10
+
+
+# All types:
+# PLAYER_KILL
+# ENTITY_KILL;ID
+# BLOCK_BREAK;ID
+# BLOCK_PLACE;ID
+# CHAT
+#
+quest1:
+  type: ENTITY_KILL;ZOMBIE
+  target: 50
+  name: "Zombie Assault"
+  description: "Kill 50 zombies"
+  progress: individual
+  rewards-description:
+    - "&a+ &e20 clan coins"
+    - "&a+ &e40 experience"
+    - "&a+ &e2000 money"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7You completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e20 clan coins"
+    - "[message] &a+ &e40 experience"
+    - "[message] &a+ &e2000 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 20"
+    - "[clan_exp_give] 40"
+    - "[money_give] 2000"
+
+quest2:
+  type: BLOCK_BREAK;OAK_LOG
+  target: 500
+  name: "Lumberjack"
+  description: "Break 500 oak logs"
+  progress: individual
+  rewards-description:
+    - "&a+ &e15 clan coins"
+    - "&a+ &e25 experience"
+    - "&a+ &e1500 money"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7You completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e15 clan coins"
+    - "[message] &a+ &e25 experience"
+    - "[message] &a+ &e1500 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 15"
+    - "[clan_exp_give] 25"
+    - "[money_give] 1500"
+
+quest3:
+  type: BLOCK_PLACE;TORCH
+  target: 200
+  name: "Light Bringer"
+  description: "Place 200 torches"
+  progress: individual
+  rewards-description:
+    - "&a+ &e10 clan coins"
+    - "&a+ &e20 experience"
+    - "&a+ &e1000 money"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7You completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e10 clan coins"
+    - "[message] &a+ &e20 experience"
+    - "[message] &a+ &e1000 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 10"
+    - "[clan_exp_give] 20"
+    - "[money_give] 1000"
+
+quest4:
+  type: ENTITY_KILL;SKELETON
+  target: 30
+  name: "Skeleton Hunter"
+  description: "Kill 30 skeletons"
+  progress: global
+  rewards-description:
+    - "&a+ &e30 clan coins"
+    - "&a+ &e50 experience"
+    - "&a+ &e3000 money"
+  global-rewards:
+    - "[clan_exp_give] 100"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7Your clan completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e30 clan coins"
+    - "[message] &a+ &e50 experience"
+    - "[message] &a+ &e3000 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 30"
+    - "[money_give] 3000"
+
+quest5:
+  type: BLOCK_BREAK;DIAMOND_ORE
+  target: 50
+  name: "Diamond Miner"
+  description: "Mine 50 diamond ores"
+  progress: individual
+  rewards-description:
+    - "&a+ &e50 clan coins"
+    - "&a+ &e30 experience"
+    - "&a+ &e5000 money"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7You completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e50 clan coins"
+    - "[message] &a+ &e30 experience"
+    - "[message] &a+ &e5000 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 50"
+    - "[clan_exp_give] 30"
+    - "[money_give] 5000"
+
+quest6:
+  type: ENTITY_KILL;CREEPER
+  target: 40
+  name: "Keeper of Silence"
+  description: "Kill 40 creepers"
+  progress: global
+  rewards-description:
+    - "&a+ &e40 clan coins"
+    - "&a+ &e60 experience"
+    - "&a+ &e3000 money"
+  global-rewards:
+    - "[clan_exp_give] 120"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7Your clan completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e40 clan coins"
+    - "[message] &a+ &e60 experience"
+    - "[message] &a+ &e3000 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 40"
+    - "[money_give] 3000"
+
+quest7:
+  type: BLOCK_PLACE;STONE
+  target: 1000
+  name: "Builder"
+  description: "Place 1000 stone blocks"
+  progress: individual
+  rewards-description:
+    - "&a+ &e25 clan coins"
+    - "&a+ &e35 experience"
+    - "&a+ &e4000 money"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7You completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e25 clan coins"
+    - "[message] &a+ &e35 experience"
+    - "[message] &a+ &e4000 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 25"
+    - "[clan_exp_give] 35"
+    - "[money_give] 4000"
+
+quest8:
+  type: BLOCK_BREAK;IRON_ORE
+  target: 200
+  name: "Iron Master"
+  description: "Mine 200 iron ores"
+  progress: individual
+  rewards-description:
+    - "&a+ &e30 clan coins"
+    - "&a+ &e25 experience"
+    - "&a+ &e2500 money"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7You completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e30 clan coins"
+    - "[message] &a+ &e25 experience"
+    - "[message] &a+ &e2500 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 30"
+    - "[clan_exp_give] 25"
+    - "[money_give] 2500"
+
+quest9:
+  type: ENTITY_KILL;SPIDER
+  target: 25
+  name: "Spider Slayer"
+  description: "Kill 25 spiders"
+  progress: global
+  rewards-description:
+    - "&a+ &e20 clan coins"
+    - "&a+ &e30 experience"
+    - "&a+ &e2000 money"
+  global-rewards:
+    - "[clan_exp_give] 80"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7Your clan completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e20 clan coins"
+    - "[message] &a+ &e30 experience"
+    - "[message] &a+ &e2000 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 20"
+    - "[money_give] 2000"
+
+quest10:
+  type: BLOCK_BREAK;SAND
+  target: 1000
+  name: "Sand Digger"
+  description: "Break 1000 sand blocks"
+  progress: individual
+  rewards-description:
+    - "&a+ &e15 clan coins"
+    - "&a+ &e20 experience"
+    - "&a+ &e1500 money"
+  rewards:
+    - "[sound] ENTITY_PLAYER_LEVELUP"
+    - "[message] &6&m                                      &r"
+    - "[message] &e&l⭐ &7You completed the quest &e%name%&7."
+    - "[message] &6&m                                      &r"
+    - "[message] &6&lRewards:"
+    - "[message] &a+ &e15 clan coins"
+    - "[message] &a+ &e20 experience"
+    - "[message] &a+ &e1500 money"
+    - "[message] &6&m                                      &r"
+    - "[coin_give] 15"
+    - "[clan_exp_give] 20"
+    - "[money_give] 1500"
