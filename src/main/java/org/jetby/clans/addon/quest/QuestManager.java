@@ -28,7 +28,7 @@ public class QuestManager {
     public boolean isCompleted(@NotNull Member member, @NotNull Quest quest) {
         Clan clan = getClan(member);
         if (clan == null) return false;
-        return storage.get(clan.getId()).isCompleted(member.getUuid(), quest.id());
+        return storage.get(clan).isCompleted(member.getUuid(), quest.id());
     }
 
     public boolean isPassable(@NotNull Member member, @NotNull Quest quest) {
@@ -51,14 +51,14 @@ public class QuestManager {
     public int getProgress(@NotNull Member member, @NotNull Quest quest) {
         Clan clan = getClan(member);
         if (clan == null) return 0;
-        return storage.get(clan.getId()).getProgress(member.getUuid(), quest.id());
+        return storage.get(clan).getProgress(member.getUuid(), quest.id());
     }
 
     public void setProgress(@NotNull Member member, @NotNull Quest quest, int progress) {
         Clan clan = getClan(member);
         if (clan == null) return;
 
-        QuestData data = storage.get(clan.getId());
+        QuestData data = storage.get(clan);
         data.setProgress(member.getUuid(), quest.id(), progress);
 
         if (progress >= quest.target() && !data.isCompleted(member.getUuid(), quest.id())) {
@@ -89,7 +89,7 @@ public class QuestManager {
 
     private void addIndividualProgress(@NotNull Player player, @NotNull Member member,
                                        @NotNull Clan clan, @NotNull Quest quest, int amount) {
-        QuestData data = storage.get(clan.getId());
+        QuestData data = storage.get(clan);
         int newProgress = data.getProgress(member.getUuid(), quest.id()) + amount;
         data.setProgress(member.getUuid(), quest.id(), newProgress);
 
@@ -100,7 +100,7 @@ public class QuestManager {
 
     private void addGlobalProgress(@NotNull Player player, @NotNull Member member,
                                    @NotNull Clan clan, @NotNull Quest quest, int amount) {
-        QuestData data = storage.get(clan.getId());
+        QuestData data = storage.get(clan);
         int newProgress = data.getProgress(member.getUuid(), quest.id()) + amount;
 
         for (Member m : clan.getMembersWithLeader()) {

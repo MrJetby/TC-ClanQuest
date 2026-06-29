@@ -10,8 +10,8 @@
 
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -22,7 +22,7 @@
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
-            <id>jetby-repo</id>
+            <id>JetbyMC</id>
             <url>https://api.jetby.org/</url>
         </repository>
         <repository>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.jetby.treexclans</groupId>
             <artifactId>api</artifactId>
-            <version>3.0</version>
+            <version>3.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>org.jetby.libb</groupId>
             <artifactId>api</artifactId>
-            <version>1.2</version>
+            <version>1.2.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

@@ -36,7 +36,7 @@ public class QuestsGui extends Gui {
 
         if (questItems.isEmpty()) return;
 
-        Item template = questItems.get(0);
+        Item template = questItems.getFirst();
         String templateType = template.section().getString("type", "");
 
         List<Integer> slots = questItems.stream()
@@ -70,7 +70,7 @@ public class QuestsGui extends Gui {
             lore.addAll(quest.rewardsDescription());
             wrapper.setLore(lore.stream().map(this::applyPlaceholders).collect(Collectors.toList()));
 
-            if (template.customModelData() != 0) wrapper.customModelData(template.customModelData());
+            wrapper.customModelData(template.customModelData());
             if (template.enchanted()) wrapper.enchanted(true);
 
             addItem(wrapper);

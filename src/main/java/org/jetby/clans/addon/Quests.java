@@ -1,6 +1,7 @@
 package org.jetby.clans.addon;
 
 import lombok.Getter;
+import org.jetby.clans.api.TreexClansAPI;
 import org.jetby.clans.api.addons.JavaAddon;
 import org.jetby.clans.api.addons.annotations.ClanAddon;
 import org.jetby.clans.api.gui.ClanGuiData;
@@ -29,7 +30,7 @@ public class Quests extends JavaAddon {
 
         this.isGradual = getConfig().getBoolean("gradual-quest", true);
 
-        questStorage = new QuestStorage(getDataFolder(), getLogger());
+        questStorage = new QuestStorage();
         questStorage.load();
 
         questManager = new QuestManager(this, questStorage);

@@ -1,108 +1,100 @@
 package org.jetby.clans.addon.configuration;
 
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetby.clans.addon.model.QuestData;
+import org.jetby.clans.api.TreexClansAPI;
+import org.jetby.clans.api.service.clan.Clan;
+import org.jetby.clans.api.storage.Storage;
+import org.jetby.clans.api.storage.base.BaseSection;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 public class QuestStorage {
 
-    private final File file;
-    private final Logger logger;
-    private final Map<String, QuestData> data = new HashMap<>();
+    private final Storage storage;
 
-    public QuestStorage(File dataFolder, Logger logger) {
-        this.file = new File(dataFolder, "quest-data.yml");
-        this.logger = logger;
+    public QuestStorage() {
+        this.storage = TreexClansAPI.get().getStorage();
     }
 
-    public QuestData get(String clanId) {
-        return data.computeIfAbsent(clanId, k -> new QuestData());
+    private final Map<Clan, QuestData> data = new HashMap<>();
+
+    public QuestData get(Clan clan) {
+        return data.computeIfAbsent(clan, k -> new QuestData());
     }
 
-    public void remove(String clanId) {
-        data.remove(clanId);
+    public void remove(Clan clan) {
+        data.remove(clan);
     }
 
     public void load() {
         data.clear();
-        if (!file.exists()) return;
 
-        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-
-        for (String clanId : config.getKeys(false)) {
+        for (Clan clan : storage.getClanList(Integer.MAX_VALUE)) {
             QuestData questData = new QuestData();
-            ConfigurationSection clanSection = config.getConfigurationSection(clanId);
-            if (clanSection == null) continue;
+            BaseSection base = storage.getSection().of(clan).section("Quests");
 
-            ConfigurationSection progressSection = clanSection.getConfigurationSection("progress");
+            BaseSection progressSection = base.section("progress");
             if (progressSection != null) {
-                for (String questId : progressSection.getKeys(false)) {
-                    ConfigurationSection playersSection = progressSection.getConfigurationSection(questId);
+
+                for (String questId : progressSection.keys().join()) {
+                    BaseSection playersSection = progressSection.section(questId);
                     if (playersSection == null) continue;
-                    for (String uuidStr : playersSection.getKeys(false)) {
+                    for (String uuidStr : playersSection.keys().join()) {
                         try {
                             UUID uuid = UUID.fromString(uuidStr);
-                            int value = playersSection.getInt(uuidStr, 0);
+                            int value = playersSection.getInt(uuidStr).join();
                             questData.setProgress(uuid, questId, value);
                         } catch (IllegalArgumentException e) {
-                            logger.warning("Invalid UUID in quest-data.yml: " + uuidStr);
+                            throw new RuntimeException("Invalid UUID in quest-data.yml", e);
                         }
                     }
                 }
+
             }
 
-            ConfigurationSection completedSection = clanSection.getConfigurationSection("completed");
+            BaseSection completedSection = base.section("completed");
             if (completedSection != null) {
-                for (String uuidStr : completedSection.getKeys(false)) {
+                for (String uuidStr : completedSection.keys().join()) {
                     try {
                         UUID uuid = UUID.fromString(uuidStr);
-                        List<String> completedQuests = completedSection.getStringList(uuidStr);
+                        List<String> completedQuests = completedSection.getStringList(uuidStr).join();
                         completedQuests.forEach(questId -> questData.markCompleted(uuid, questId));
                     } catch (IllegalArgumentException e) {
-                        logger.warning("Invalid UUID in quest-data.yml: " + uuidStr);
+                        throw new RuntimeException("Invalid UUID in quest-data.yml", e);
                     }
                 }
             }
 
-            data.put(clanId, questData);
+            data.put(clan, questData);
         }
     }
 
     public void save() {
-        FileConfiguration config = new YamlConfiguration();
 
-        for (Map.Entry<String, QuestData> entry : data.entrySet()) {
-            String clanId = entry.getKey();
+
+        for (Map.Entry<Clan, QuestData> entry : data.entrySet()) {
+            Clan clan = entry.getKey();
             QuestData questData = entry.getValue();
+
+            BaseSection base = storage.getSection().of(clan).section("Quests");
 
             for (Map.Entry<UUID, Map<String, Integer>> progressEntry : questData.getAllProgress().entrySet()) {
                 UUID uuid = progressEntry.getKey();
+
                 for (Map.Entry<String, Integer> questEntry : progressEntry.getValue().entrySet()) {
-                    config.set(clanId + ".progress." + questEntry.getKey() + "." + uuid, questEntry.getValue());
+                    base.section("progress").section(questEntry.getKey()).set(uuid.toString(), questEntry.getValue());
                 }
             }
 
             for (Map.Entry<UUID, List<String>> completedEntry : questData.getAllCompleted().entrySet()) {
                 if (!completedEntry.getValue().isEmpty()) {
-                    config.set(clanId + ".completed." + completedEntry.getKey(), completedEntry.getValue());
+                    base.section("completed").set(completedEntry.getKey().toString(), completedEntry.getValue());
                 }
             }
         }
 
-        try {
-            file.getParentFile().mkdirs();
-            config.save(file);
-        } catch (IOException e) {
-            logger.severe("Failed to save quest-data.yml: " + e.getMessage());
-        }
     }
 }
